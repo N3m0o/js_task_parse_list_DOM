@@ -1,14 +1,15 @@
 'use strict';
 
 const list = document.querySelector('ul');
-const items = Array.from(list.children);
 
 const parseSalary = (salaryString) => {
   return Number(salaryString.replace(/[$,]/g, ''));
 };
 
-const sortList = (liArray, ulLink) => {
-  liArray.sort((firstElement, secondElement) => {
+const sortList = (ulLink) => {
+  const items = Array.from(ulLink.children);
+
+  items.sort((firstElement, secondElement) => {
     const firstElementSalary = parseSalary(firstElement.dataset.salary);
 
     const secondElementSalary = parseSalary(secondElement.dataset.salary);
@@ -17,11 +18,13 @@ const sortList = (liArray, ulLink) => {
   });
 
   ulLink.innerHTML = '';
-  liArray.forEach((item) => ulLink.append(item));
+  items.forEach((item) => ulLink.append(item));
 };
 
-const getEmployees = (liArray) => {
-  return liArray.map((li) => ({
+const getEmployees = (ulLink) => {
+  const items = Array.from(ulLink.children);
+
+  return items.map((li) => ({
     name: li.textContent.trim(),
     position: li.dataset.position,
     salary: parseSalary(li.dataset.salary),
@@ -29,5 +32,5 @@ const getEmployees = (liArray) => {
   }));
 };
 
-sortList(items, list);
-getEmployees(items);
+sortList(list);
+getEmployees(list);
