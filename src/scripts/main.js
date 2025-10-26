@@ -33,4 +33,6 @@ const getEmployees = (ulLink) => {
 };
 
 sortList(list);
-getEmployees(list);
+
+// eslint-disable-next-line no-unused-vars
+const employees = getEmployees(list);
